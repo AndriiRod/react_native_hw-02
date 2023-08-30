@@ -4,6 +4,8 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useState } from "react";
 
@@ -17,38 +19,46 @@ const LoginScreen = () => {
     setIsFocused(false);
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Увійти</Text>
-      <View style={styles.form}>
-        <TextInput
-          placeholder="Адреса електронної пошти"
-          placeholderTextColor={"#BDBDBD"}
-          style={[styles.formInput, isFocused ? styles.inputFocused : null]}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        <View style={styles.passInputWrap}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Увійти</Text>
+        <View style={styles.form}>
           <TextInput
-            placeholder="Пароль"
+            placeholder="Адреса електронної пошти"
             placeholderTextColor={"#BDBDBD"}
-            style={[styles.formInput, styles.passwordInput]}
-            secureTextEntry={true}
+            style={[
+              styles.formInput,
+              isFocused ? styles.inputFocused : null,
+              isFocused,
+            ]}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
-          <TouchableOpacity activeOpacity={0.7} style={styles.showBtn}>
-            <Text style={styles.btnText}>Показать</Text>
+          <View style={styles.passInputWrap}>
+            <TextInput
+              placeholder="Пароль"
+              placeholderTextColor={"#BDBDBD"}
+              style={[styles.formInput, styles.passwordInput]}
+              secureTextEntry={true}
+            />
+            <TouchableOpacity activeOpacity={0.7} style={styles.showBtn}>
+              <Text style={styles.btnText}>Показать</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity activeOpacity={0.8} style={styles.entersBtn}>
+            <Text style={styles.entersBtnText}>Увійти</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity activeOpacity={0.8} style={styles.entersBtn}>
-          <Text style={styles.entersBtnText}>Увійти</Text>
+        <TouchableOpacity activeOpacity={0.7} style={styles.regBtnLink}>
+          <Text style={styles.regBtnLinkText}>Немає акаунту?</Text>
+          <Text style={[styles.regBtnLinkText, styles.textUnderline]}>
+            Зареєструватися
+          </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.regBtnLink}>
-        <Text style={styles.regBtnLinkText}>Немає акаунту?</Text>
-        <Text style={[styles.regBtnLinkText, styles.textUnderline]}>
-          Зареєструватися
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
 
     paddingTop: 32,
     paddingRight: 16,
-    paddingBottom: 111,
+    // paddingBottom: 111,
     paddingLeft: 16,
   },
   title: {
