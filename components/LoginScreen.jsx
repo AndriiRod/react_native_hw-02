@@ -1,18 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { Keyboard } from "react-native";
 
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput,
-  KeyboardAvoidingView,
-} from "react-native";
-
-import {
-  FormContainer,
+  LoginContainer,
   Title,
   Form,
+  InputsWrap,
   Input,
   inputPass,
   InputPassWrap,
@@ -26,19 +20,37 @@ import {
 } from "./Form.styled";
 
 const LoginScreen = () => {
-  const [isLoginFocused, setLoginFocused] = useState(false);
+  const [isEmailFocused, setEmailFocused] = useState(false);
   const [isPasswordFocused, setPasswordFocused] = useState(false);
+  const [isKeyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => setKeyboardOpen(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setKeyboardOpen(false)
+    );
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+
   return (
-    <KeyboardAvoidingView behavior="padding">
-      <FormContainer focus={[isLoginFocused, isPasswordFocused]}>
-        <Title>Увійти</Title>
-        <Form>
+    <LoginContainer focus={isKeyboardOpen}>
+      {/* <FormContainer focus={[isLoginFocused, isPasswordFocused]}> */}
+      <Title>Увійти</Title>
+      <Form>
+        <InputsWrap>
           <Input
             placeholder="Адреса електронної пошти"
             placeholderTextColor={"#BDBDBD"}
-            focus={isLoginFocused}
-            onFocus={() => setLoginFocused(true)}
-            onBlur={() => setLoginFocused(false)}
+            focus={isEmailFocused}
+            onFocus={() => setEmailFocused(true)}
+            onBlur={() => setEmailFocused(false)}
           />
           <InputPassWrap>
             <Input
@@ -54,16 +66,16 @@ const LoginScreen = () => {
               <BtnShowText>Показати</BtnShowText>
             </BtnShow>
           </InputPassWrap>
-          <BtnForm activeOpacity={0.8}>
-            <BtnFormText>Увійти</BtnFormText>
-          </BtnForm>
-        </Form>
-        <BtnReg activeOpacity={0.7}>
-          <BtnRegText>Немає акаунту?</BtnRegText>
-          <TextUnderline>Зареєструватися</TextUnderline>
-        </BtnReg>
-      </FormContainer>
-    </KeyboardAvoidingView>
+        </InputsWrap>
+        <BtnForm activeOpacity={0.8}>
+          <BtnFormText>Увійти</BtnFormText>
+        </BtnForm>
+      </Form>
+      <BtnReg activeOpacity={0.7}>
+        <BtnRegText>Немає акаунту?</BtnRegText>
+        <TextUnderline>Зареєструватися</TextUnderline>
+      </BtnReg>
+    </LoginContainer>
   );
 };
 

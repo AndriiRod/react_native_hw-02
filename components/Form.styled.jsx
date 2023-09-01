@@ -5,16 +5,16 @@ const text = css`
   font-size: 16px;
 `;
 
-export const FormContainer = styled.View`
+export const LoginContainer = styled.View`
   padding: 32px 16px 0;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 
   background-color: #ffffff;
-
-  padding-bottom: ${({ focus }) =>
-    focus.some((item) => item === true) ? "32px" : "111px"};
+  padding-bottom: ${({ focus }) => (focus ? "32px" : "111px")};
 `;
+// padding-bottom: ${({ focus }) =>
+//     focus.some((item) => item === true) ? "32px" : "111px"};
 
 export const Title = styled.Text`
   margin-bottom: 33px;
@@ -31,6 +31,11 @@ export const Form = styled.View`
   margin-bottom: 16px;
 `;
 
+export const InputsWrap = styled.View`
+  gap: 16px;
+  margin-bottom: 43px;
+`;
+
 export const Input = styled.TextInput`
   ${text}
   padding: 16px;
@@ -41,7 +46,6 @@ export const Input = styled.TextInput`
 `;
 
 export const InputPassWrap = styled.View`
-  margin: 16px 0 43px;
   position: relative;
 `;
 
@@ -86,4 +90,32 @@ export const TextUnderline = styled.Text`
   ${text}
   color:#1B4371;
   text-decoration: underline;
+`;
+
+// !-----------------------------------
+
+export const RegistrationContainer = styled.View`
+  padding: 0 16px 0;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+
+  background-color: #ffffff;
+  padding-bottom: ${({ focus }) => (focus ? "32px" : "45px")};
+`;
+
+export const ImageBox = styled.View`
+  position: relative;
+  margin: -60px auto 32px;
+`;
+export const Image = styled.View`
+  width: 120px;
+  height: 120px;
+  background-color: #f6f6f6;
+  border-radius: 16px;
+`;
+
+export const IconWrap = styled.View`
+  position: absolute;
+  bottom: 14px;
+  right: -12px;
 `;

@@ -1,8 +1,8 @@
-import { ImageBackground } from "react-native";
+import { ImageBackground, KeyboardAvoidingView } from "react-native";
 import { css } from "@emotion/native";
 
 import LoginScreen from "../components/LoginScreen";
-// import RegistrationScreen from "../components/RegistrationScreen";
+import RegistrationScreen from "../components/RegistrationScreen";
 
 const PostsScreen = () => {
   return (
@@ -11,7 +11,10 @@ const PostsScreen = () => {
       resizeMode="cover"
       style={image}
     >
-      <LoginScreen />
+      <KeyboardAvoidingView behavior={"padding"}>
+        {/* <LoginScreen /> */}
+        <RegistrationScreen />
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
