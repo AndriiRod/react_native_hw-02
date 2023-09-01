@@ -13,9 +13,9 @@ import {
   FormContainer,
   Title,
   Form,
-  InputMail,
+  Input,
+  inputPass,
   InputPassWrap,
-  InputPass,
   BtnShow,
   BtnShowText,
   BtnForm,
@@ -30,10 +30,10 @@ const LoginScreen = () => {
   const [isPasswordFocused, setPasswordFocused] = useState(false);
   return (
     <KeyboardAvoidingView behavior="padding">
-      <FormContainer>
+      <FormContainer focus={[isLoginFocused, isPasswordFocused]}>
         <Title>Увійти</Title>
         <Form>
-          <InputMail
+          <Input
             placeholder="Адреса електронної пошти"
             placeholderTextColor={"#BDBDBD"}
             focus={isLoginFocused}
@@ -41,10 +41,14 @@ const LoginScreen = () => {
             onBlur={() => setLoginFocused(false)}
           />
           <InputPassWrap>
-            <InputPass
+            <Input
+              style={inputPass}
               placeholder="Пароль"
               placeholderTextColor={"#BDBDBD"}
               secureTextEntry={true}
+              focus={isPasswordFocused}
+              onFocus={() => setPasswordFocused(true)}
+              onBlur={() => setPasswordFocused(false)}
             />
             <BtnShow activeOpacity={0.7}>
               <BtnShowText>Показати</BtnShowText>

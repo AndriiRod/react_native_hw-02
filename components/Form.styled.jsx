@@ -11,6 +11,9 @@ export const FormContainer = styled.View`
   border-top-right-radius: 25px;
 
   background-color: #ffffff;
+
+  padding-bottom: ${({ focus }) =>
+    focus.some((item) => item === true) ? "32px" : "111px"};
 `;
 
 export const Title = styled.Text`
@@ -28,22 +31,13 @@ export const Form = styled.View`
   margin-bottom: 16px;
 `;
 
-const input = css`
+export const Input = styled.TextInput`
   ${text}
-
   padding: 16px;
-
   height: 50px;
-  border: 1px solid #e8e8e8;
   border-radius: 8px;
-
+  border: 1px solid ${({ focus }) => (focus ? "#FF6C00" : "#E8E8E8")};
   background-color: #f6f6f6;
-`;
-
-export const InputMail = styled.TextInput`
-  ${input}
-
-  border: 1px solid ${(props) => (props.focus ? "red" : "blue")};
 `;
 
 export const InputPassWrap = styled.View`
@@ -51,9 +45,7 @@ export const InputPassWrap = styled.View`
   position: relative;
 `;
 
-export const InputPass = styled.TextInput`
-  ${input}
-
+export const inputPass = css`
   padding-right: 87px;
 `;
 export const BtnShow = styled.TouchableOpacity`
