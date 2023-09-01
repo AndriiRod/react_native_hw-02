@@ -1,5 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import PostsScreen from "./Screens/PostsScreen";
+import { css } from "@emotion/native";
+
 import {
   useFonts,
   Roboto_400Regular,
@@ -16,14 +18,12 @@ export default function App() {
     return null;
   }
   return (
-    <View style={styles.container}>
+    <View style={container}>
       <PostsScreen />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const container = css`
+  flex: 1;
+`;

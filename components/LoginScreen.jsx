@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -5,42 +7,83 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
 } from "react-native";
-import { useState } from "react";
+
+import {
+  FormContainer,
+  Title,
+  Form,
+  InputMail,
+  InputPassWrap,
+  InputPass,
+  BtnShow,
+  BtnShowText,
+  BtnForm,
+  BtnFormText,
+  BtnReg,
+  BtnRegText,
+  TextUnderline,
+} from "./Form.styled";
 
 const LoginScreen = () => {
-  const [isFocused, setIsFocused] = useState(false);
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+  const [isLoginFocused, setLoginFocused] = useState(false);
+  const [isPasswordFocused, setPasswordFocused] = useState(false);
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding">
+      <FormContainer>
+        <Title>Увійти</Title>
+        <Form>
+          <InputMail
+            placeholder="Адреса електронної пошти"
+            placeholderTextColor={"#BDBDBD"}
+            focus={isLoginFocused}
+            onFocus={() => setLoginFocused(true)}
+            onBlur={() => setLoginFocused(false)}
+          />
+          <InputPassWrap>
+            <InputPass
+              placeholder="Пароль"
+              placeholderTextColor={"#BDBDBD"}
+              secureTextEntry={true}
+            />
+            <BtnShow activeOpacity={0.7}>
+              <BtnShowText>Показати</BtnShowText>
+            </BtnShow>
+          </InputPassWrap>
+          <BtnForm activeOpacity={0.8}>
+            <BtnFormText>Увійти</BtnFormText>
+          </BtnForm>
+        </Form>
+        <BtnReg activeOpacity={0.7}>
+          <BtnRegText>Немає акаунту?</BtnRegText>
+          <TextUnderline>Зареєструватися</TextUnderline>
+        </BtnReg>
+      </FormContainer>
+    </KeyboardAvoidingView>
+  );
+};
+
+export default LoginScreen;
+/* <KeyboardAvoidingView behavior="padding">
+      <View
+        style={{ ...styles.container, paddingBottom: isFocused ? 32 : 111 }}
+      >
         <Text style={styles.title}>Увійти</Text>
         <View style={styles.form}>
           <TextInput
             placeholder="Адреса електронної пошти"
             placeholderTextColor={"#BDBDBD"}
-            style={[
-              styles.formInput,
-              isFocused ? styles.inputFocused : null,
-              isFocused,
-            ]}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            style={[styles.formInput, isFocused ? styles.inputFocused : null]}
           />
           <View style={styles.passInputWrap}>
             <TextInput
               placeholder="Пароль"
               placeholderTextColor={"#BDBDBD"}
-              style={[styles.formInput, styles.passwordInput]}
+              style={[
+                styles.formInput,
+                styles.passwordInput,
+                isFocused ? styles.inputFocused : null,
+              ]}
               secureTextEntry={true}
             />
             <TouchableOpacity activeOpacity={0.7} style={styles.showBtn}>
@@ -58,101 +101,90 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
-  );
-};
+    </KeyboardAvoidingView> */
 
-export const testSyles = StyleSheet.create({
-  textColor: {
-    color: "red",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor: "#ffffff",
+//     borderTopRightRadius: 25,
+//     borderTopLeftRadius: 25,
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#ffffff",
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
+//     paddingTop: 32,
+//     paddingRight: 16,
+//     paddingLeft: 16,
+//   },
+//   title: {
+//     fontFamily: "Roboto_500Medium",
+//     color: "#212121",
+//     fontSize: 30,
+//     letterSpacing: 0.3,
+//     textAlign: "center",
+//     marginBottom: 33,
+//   },
 
-    paddingTop: 32,
-    paddingRight: 16,
-    // paddingBottom: 111,
-    paddingLeft: 16,
-  },
-  title: {
-    fontFamily: "Roboto_500Medium",
-    color: "#212121",
-    fontSize: 30,
-    letterSpacing: 0.3,
-    textAlign: "center",
-    marginBottom: 33,
-  },
+//   form: {
+//     marginBottom: 16,
+//   },
 
-  form: {
-    marginBottom: 16,
-  },
+//   formInput: {
+//     height: 50,
 
-  formInput: {
-    height: 50,
+//     backgroundColor: "#F6F6F6",
+//     borderWidth: 1,
+//     borderColor: "#E8E8E8",
+//     borderStyle: "solid",
+//     borderRadius: 8,
 
-    backgroundColor: "#F6F6F6",
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    borderStyle: "solid",
-    borderRadius: 8,
+//     fontFamily: "Roboto_400Regular",
+//     fontSize: 16,
+//     padding: 16,
+//   },
 
-    fontFamily: "Roboto_400Regular",
-    fontSize: 16,
-    padding: 16,
-  },
+//   inputFocused: {
+//     borderColor: "#FF6C00",
+//   },
+//   passInputWrap: {
+//     marginTop: 16,
+//     marginBottom: 43,
+//   },
 
-  inputFocused: {
-    borderColor: "#FF6C00",
-  },
-  passInputWrap: {
-    marginTop: 16,
-    marginBottom: 43,
-  },
-
-  passwordInput: {
-    paddingRight: 87,
-    position: "relative",
-  },
-  btnText: {
-    fontFamily: "Roboto_400Regular",
-    fontSize: 16,
-    color: "#1B4371",
-  },
-  showBtn: {
-    position: "absolute",
-    top: 15,
-    right: 15,
-  },
-  entersBtn: {
-    backgroundColor: "#FF6C00",
-    borderRadius: 100,
-  },
-  entersBtnText: {
-    color: "#ffffff",
-    fontFamily: "Roboto_400Regular",
-    fontSize: 16,
-    textAlign: "center",
-    padding: 16,
-  },
-  regBtnLink: {
-    flexDirection: "row",
-    gap: 3,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  regBtnLinkText: {
-    fontFamily: "Roboto_400Regular",
-    fontSize: 16,
-    color: "#1B4371",
-  },
-  textUnderline: {
-    textDecorationLine: "underline",
-  },
-});
-
-export default LoginScreen;
+//   passwordInput: {
+//     paddingRight: 87,
+//     position: "relative",
+//   },
+//   btnText: {
+//     fontFamily: "Roboto_400Regular",
+//     fontSize: 16,
+//     color: "#1B4371",
+//   },
+//   showBtn: {
+//     position: "absolute",
+//     top: 15,
+//     right: 15,
+//   },
+//   entersBtn: {
+//     backgroundColor: "#FF6C00",
+//     borderRadius: 100,
+//   },
+//   entersBtnText: {
+//     color: "#ffffff",
+//     fontFamily: "Roboto_400Regular",
+//     fontSize: 16,
+//     textAlign: "center",
+//     padding: 16,
+//   },
+//   regBtnLink: {
+//     flexDirection: "row",
+//     gap: 3,
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//   },
+//   regBtnLinkText: {
+//     fontFamily: "Roboto_400Regular",
+//     fontSize: 16,
+//     color: "#1B4371",
+//   },
+//   textUnderline: {
+//     textDecorationLine: "underline",
+//   },
+// });

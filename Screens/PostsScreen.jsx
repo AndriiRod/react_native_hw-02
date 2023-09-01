@@ -1,23 +1,24 @@
+import { ImageBackground } from "react-native";
+import { css } from "@emotion/native";
+
 import LoginScreen from "../components/LoginScreen";
 // import RegistrationScreen from "../components/RegistrationScreen";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
 
 const PostsScreen = () => {
   return (
     <ImageBackground
       source={require("../assets/authBg.jpg")}
       resizeMode="cover"
-      style={styles.image}
+      style={image}
     >
       <LoginScreen />
     </ImageBackground>
   );
 };
-export default PostsScreen;
 
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-});
+const image = css`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+export default PostsScreen;
