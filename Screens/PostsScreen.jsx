@@ -1,20 +1,18 @@
-import { ImageBackground, KeyboardAvoidingView } from "react-native";
+import { ImageBackground } from "react-native";
 import { css } from "@emotion/native";
 
 import LoginScreen from "../components/LoginScreen";
 import RegistrationScreen from "../components/RegistrationScreen";
 
-const PostsScreen = () => {
+const PostsScreen = ({ isKeyboardOpen }) => {
   return (
     <ImageBackground
       source={require("../assets/authBg.jpg")}
       resizeMode="cover"
       style={image}
     >
-      <KeyboardAvoidingView behavior={"padding"}>
-        {/* <LoginScreen /> */}
-        <RegistrationScreen />
-      </KeyboardAvoidingView>
+      {/* <LoginScreen isKeyboard={isKeyboardOpen} /> */}
+      <RegistrationScreen isKeyboard={isKeyboardOpen} />
     </ImageBackground>
   );
 };

@@ -1,6 +1,8 @@
-import { View } from "react-native";
-import PostsScreen from "./Screens/PostsScreen";
+import { View, Keyboard } from "react-native";
+import { useState, useEffect } from "react";
 import { css } from "@emotion/native";
+
+import PostsScreen from "./Screens/PostsScreen";
 
 import {
   useFonts,
@@ -13,13 +15,29 @@ export default function App() {
     Roboto_400Regular,
     Roboto_500Medium,
   });
+  const [isKeyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => setKeyboardOpen(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setKeyboardOpen(false)
+    );
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
   return (
     <View style={container}>
-      <PostsScreen />
+      <PostsScreen isKeyboardOpen={isKeyboardOpen} />
     </View>
   );
 }

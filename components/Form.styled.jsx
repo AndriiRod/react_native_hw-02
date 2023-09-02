@@ -9,12 +9,9 @@ export const LoginContainer = styled.View`
   padding: 32px 16px 0;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-
+  padding-bottom: ${({ focus }) => (focus ? "32px" : "43px")};
   background-color: #ffffff;
-  padding-bottom: ${({ focus }) => (focus ? "32px" : "111px")};
 `;
-// padding-bottom: ${({ focus }) =>
-//     focus.some((item) => item === true) ? "32px" : "111px"};
 
 export const Title = styled.Text`
   margin-bottom: 33px;
@@ -28,12 +25,11 @@ export const Title = styled.Text`
 `;
 
 export const Form = styled.View`
-  margin-bottom: 16px;
+  flex: 1;
 `;
 
 export const InputsWrap = styled.View`
   gap: 16px;
-  margin-bottom: 43px;
 `;
 
 export const Input = styled.TextInput`
@@ -62,6 +58,13 @@ export const BtnShowText = styled.Text`
   ${text}
   color:#1B4371;
 `;
+
+export const FormFooterLogin = styled.View`
+  gap: 16px;
+  padding: 0 16px 111px;
+  background-color: #ffffff;
+`;
+
 export const BtnForm = styled.TouchableOpacity`
   border-radius: 100px;
   background-color: #ff6c00;
@@ -95,12 +98,12 @@ export const TextUnderline = styled.Text`
 // !-----------------------------------
 
 export const RegistrationContainer = styled.View`
-  padding: 0 16px 0;
+  padding: 0 16px;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 
   background-color: #ffffff;
-  padding-bottom: ${({ focus }) => (focus ? "32px" : "45px")};
+  padding-bottom: ${({ focus }) => (focus ? "32px" : "43px")};
 `;
 
 export const ImageBox = styled.View`
@@ -118,4 +121,10 @@ export const IconWrap = styled.View`
   position: absolute;
   bottom: 14px;
   right: -12px;
+`;
+
+export const FormFooterReg = styled.View`
+  gap: 16px;
+  padding: 0 16px 45px;
+  background-color: #ffffff;
 `;
